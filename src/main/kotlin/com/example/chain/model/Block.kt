@@ -4,7 +4,7 @@ data class Block(
     // The block time in milliseconds
     val blockTime: Long = System.currentTimeMillis(),
     // List of transactions in this block
-    val transactions: List<Transaction> = listOf()
+    val transactions: MutableList<Transaction> = mutableListOf()
 ) : Comparable<Block> {
     // natural ordering of blocks by time
     override fun compareTo(other: Block): Int = when {
