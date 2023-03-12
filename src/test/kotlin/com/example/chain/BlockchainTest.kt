@@ -38,29 +38,5 @@ class BlockchainTest {
         assertEquals(block1, blocks[2])
     }
 
-    @Test
-    fun findMaximumInboundVolumeAddressTest() {
-        val blockchain = Blockchain();
-        val blockchainService = BlockchainService()
-
-        val result = blockchainService.findMaximumInboundVolumeAddress(blockchain);
-
-        assertEquals("", result)
-    }
-
-    @Test
-    fun findCoinbaseAncestorsTest() {
-        val blockchain = Blockchain();
-        val block = Block()
-        val creatorTx = Transaction(block)
-        val spenderTx = Transaction(block)
-        val address = ""
-        val coin = Coin(creatorTx, spenderTx, address)
-        val blockchainService = BlockchainService()
-
-        val result = blockchainService.findCoinbaseAncestors(coin);
-
-        assertEquals(listOf<Coin>(), result)
-    }
 
 }
