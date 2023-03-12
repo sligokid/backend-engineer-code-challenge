@@ -1,23 +1,23 @@
 package com.example.chain.service
 
 import com.example.chain.Blockchain
-import com.example.chain.model.Coin
 
 class BlockchainService {
 
-    fun findMaximumInboundVolumeAddress(blockchain: Blockchain): Any? {
+    fun findMaximumInboundVolumeAddress(blockchain: Blockchain, intervalStart: Long, intervalEnd: Long): Any? {
         val totals = mutableMapOf<String, ULong>()
         val blocks = blockchain.getBlocks()
 
         for (block in blocks) {
-            // TODO check timeframe
-            for (tx in block.transactions) {
-                if (!tx.isCoinbase) {
-                    for (coin in tx.outputs) {
-                        if (coin.spenderTx == null) {
-                            var value = totals.getOrDefault(coin.address, ULong.MIN_VALUE)
-                            value += coin.amount
-                            totals[coin.address] = value
+            if ((block.blockTime > intervalStart) && (block.blockTime < intervalEnd)) {
+                for (tx in block.transactions) {
+                    if (!tx.isCoinbase) {
+                        for (coin in tx.outputs) {
+                            if (coin.spenderTx == null) {
+                                var value = totals.getOrDefault(coin.address, ULong.MIN_VALUE)
+                                value += coin.amount
+                                totals[coin.address] = value
+                            }
                         }
                     }
                 }

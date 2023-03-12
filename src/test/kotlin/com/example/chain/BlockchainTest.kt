@@ -1,9 +1,6 @@
 package com.example.chain
 
 import com.example.chain.model.Block
-import com.example.chain.model.Coin
-import com.example.chain.model.Transaction
-import com.example.chain.service.BlockchainService
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

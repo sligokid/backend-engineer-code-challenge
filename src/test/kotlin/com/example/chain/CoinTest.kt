@@ -25,6 +25,7 @@ class CoinTest {
         assertFalse(coinB.isParentOf(coinA))
         assertTrue(coinA.isParentOf(coinB))
     }
+
     @Test
     fun coinAisAncestorOfCoinB() {
         val block0 = Block()
