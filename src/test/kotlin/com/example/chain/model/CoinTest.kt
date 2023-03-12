@@ -1,8 +1,6 @@
-package com.example.chain
+package com.example.chain.model
 
-import com.example.chain.model.Block
-import com.example.chain.model.Coin
-import com.example.chain.model.Transaction
+import com.example.chain.Blockchain
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test

@@ -119,4 +119,36 @@ class BlockchainServiceTest {
         assertEquals("wallet-2-address", address)
     }
 
+    @Test
+    fun coinbaseAncestors() {
+        val blockchainService = BlockchainService()
+        val block0 = Block()
+        val coinbaseTx = Transaction(block0, true, mutableListOf(), mutableListOf())
+        val coinA = Coin(coinbaseTx, null, "wallet-0-address")
+        //
+        val tx1 = Transaction(block0, false, mutableListOf(), mutableListOf())
+        coinA.spenderTx = tx1
+        tx1.inputs.add(coinA)
+        val coin1 = Coin(tx1, null, "wallet-1-address")
+        tx1.outputs.add(coin1);
+        //
+        val tx2 = Transaction(block0, false, mutableListOf(), mutableListOf())
+        coin1.spenderTx = tx2
+        tx2.inputs.add(coin1)
+        val coin2 = Coin(tx2, null, "wallet-2-address")
+        tx1.outputs.add(coin2);
+        //
+        val txB = Transaction(block0, false, mutableListOf(), mutableListOf())
+        coin2.spenderTx = txB
+        txB.inputs.add(coin2)
+        val coinB = Coin(txB, null, "wallet-B-address")
+        txB.outputs.add(coinB);
+
+        val result = blockchainService.findCoinbaseAncestors(coinB)
+
+        assertEquals(1, result.size)
+        assertEquals("wallet-0-address", result[0].address)
+    }
+
+
 }

@@ -1,6 +1,7 @@
 package com.example.chain.service
 
 import com.example.chain.Blockchain
+import com.example.chain.model.Coin
 
 class BlockchainService {
 
@@ -34,17 +35,21 @@ class BlockchainService {
         }
         return largestAddress
     }
-//
-//    fun findCoinbaseAncestors(coinBase: Coin): List<Coin> {
-//        val ancestors = mutableListOf<Coin>()
-//        val creatorTx = coinBase.creatorTx;
-//        if (creatorTx.isCoinbase) {
-//            for (coin in creatorTx.inputs) {
-//                ancestors.add(coin)
-//            }
-//        }
-//        return ancestors
-//    }
+
+    fun findCoinbaseAncestors(coin: Coin): List<Coin> {
+        val ancestors = mutableListOf<Coin>()
+        val creatorTx = coin.creatorTx;
+
+        for (c in creatorTx.inputs) {
+            if (!c.creatorTx.isCoinbase) {
+                ancestors.addAll(findCoinbaseAncestors(c))
+            } else if (c.isAncestorOf(coin)) {
+                ancestors.add(c)
+            }
+        }
+
+        return ancestors
+    }
 
 }
 

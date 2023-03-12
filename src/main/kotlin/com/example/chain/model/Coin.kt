@@ -35,22 +35,5 @@ data class Coin(
         return false
     }
 
-//    fun isAncestorOf(coinB: Coin, ignoreCoinBase : Boolean = true): Boolean {
-//        if (isParentOf(coinB)) {
-//            return true
-//        }
-//        if (spenderTx != null) {
-//            val coins = spenderTx!!.outputs
-//            for (coin in coins) {
-//                if (coin == coinB || coin.isParentOf(coinB)) {
-//                    if (ignoreCoinBase) {
-//                        return true
-//                    }
-//                    return creatorTx.isCoinbase
-//                }
-//            }
-//        }
-//        return false
-//    }
 }
 

@@ -1,6 +1,6 @@
-package com.example.chain
+package com.example.chain.model
 
-import com.example.chain.model.Block
+import com.example.chain.Blockchain
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
