@@ -8,7 +8,8 @@ data class Block(
 ) : Comparable<Block> {
     // natural ordering of blocks by time
     override fun compareTo(other: Block): Int = when {
-        blockTime != other.blockTime -> (other.blockTime - blockTime).toInt()
-        else -> other.blockTime.compareTo(blockTime)
+        blockTime == other.blockTime -> 0
+        blockTime < other.blockTime -> -1
+        else -> 1
     }
 }

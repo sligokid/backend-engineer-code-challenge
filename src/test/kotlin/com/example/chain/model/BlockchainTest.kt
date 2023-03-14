@@ -20,6 +20,7 @@ class BlockchainTest {
     @Test
     fun blocksAreAddedOutOfOrderSortedByTime() {
         val blockchain = Blockchain()
+        val block0 = Block(1678482697100)
         val block1 = Block(1678482698001)
         val block2 = Block(1678482698010)
         val block3 = Block(1678482698100)
@@ -27,13 +28,18 @@ class BlockchainTest {
         blockchain.add(block2)
         blockchain.add(block3)
         blockchain.add(block1)
+        blockchain.add(block0)
 
         var blocks = blockchain.getBlocks()
 
-        assertEquals(block3, blocks[0])
-        assertEquals(block2, blocks[1])
-        assertEquals(block1, blocks[2])
+        assertEquals(block0, blocks[0])
+        assertEquals(block1, blocks[1])
+        assertEquals(block2, blocks[2])
+        assertEquals(block3, blocks[3])
     }
+
+
+
 
 
 }
