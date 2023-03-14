@@ -30,9 +30,9 @@ class BlockchainTest {
 
         var blocks = blockchain.getBlocks()
 
-        assertEquals(block3, blocks[0])
+        assertEquals(block1, blocks[0])
         assertEquals(block2, blocks[1])
-        assertEquals(block1, blocks[2])
+        assertEquals(block3, blocks[2])
     }
 
 
