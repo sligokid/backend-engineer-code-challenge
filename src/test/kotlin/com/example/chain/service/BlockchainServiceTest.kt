@@ -93,6 +93,94 @@ class BlockchainServiceTest {
     }
 
     @Test
+    fun moveSlidingWindowBeforeStartToStart() {
+        val blockchainService = BlockchainService()
+        val blockchain = Blockchain()
+        val block1 = Block(1678482698001)
+
+        blockchain.add(block1)
+
+        val index = blockchainService.getSearchStartIndex(blockchain.getBlocks(), 1678482697001)
+
+        assertEquals(0, index)
+    }
+
+    @Test
+    fun slidingWindowAtStart() {
+        val blockchainService = BlockchainService()
+        val blockchain = Blockchain()
+        val block1 = Block(1678482698001)
+
+        blockchain.add(block1)
+
+        val index = blockchainService.getSearchStartIndex(blockchain.getBlocks(), 1678482698001)
+
+        assertEquals(0, index)
+    }
+
+    @Test
+    fun moveSlidingWindowPastStart() {
+        val blockchainService = BlockchainService()
+        val blockchain = Blockchain()
+        val block1 = Block(1678482698001)
+
+        blockchain.add(block1)
+
+        val index = blockchainService.getSearchStartIndex(blockchain.getBlocks(), 1678482699001)
+
+        assertEquals(1, index)
+    }
+
+    @Test
+    fun slidingWindowAtEnd() {
+        val blockchainService = BlockchainService()
+        val blockchain = Blockchain()
+        val block1 = Block(1678482698001)
+        val block2 = Block(1678482698002)
+
+        blockchain.add(block1)
+        blockchain.add(block2)
+
+        val index = blockchainService.getSearchStartIndex(blockchain.getBlocks(), 1678482698002)
+
+        assertEquals(1, index)
+    }
+
+    @Test
+    fun moveSlidingWindowPastEnd() {
+        val blockchainService = BlockchainService()
+        val blockchain = Blockchain()
+        val block1 = Block(1678482698001)
+        val block2 = Block(1678482698002)
+
+        blockchain.add(block1)
+        blockchain.add(block2)
+
+        val index = blockchainService.getSearchStartIndex(blockchain.getBlocks(), 1678482699003)
+
+        assertEquals(2, index)
+    }
+
+    @Test
+    fun moveSlidingWindowNotFoundToNextHigher() {
+        val blockchainService = BlockchainService()
+        val blockchain = Blockchain()
+        val block1 = Block(1678482698001)
+        val block2 = Block(1678482698002)
+        val block3 = Block(1678482698003)
+        val block4 = Block(1678482698006)
+
+        blockchain.add(block1)
+        blockchain.add(block2)
+        blockchain.add(block3)
+        blockchain.add(block4)
+
+        val index = blockchainService.getSearchStartIndex(blockchain.getBlocks(), 1678482698004)
+
+        assertEquals(3, index)
+    }
+
+    @Test
     fun findMaximumInboundVolumeAddress() {
         val blockchainService = BlockchainService()
         val blockchain = Blockchain()
@@ -149,6 +237,5 @@ class BlockchainServiceTest {
         assertEquals(1, result.size)
         assertEquals("wallet-0-address", result[0].address)
     }
-
 
 }

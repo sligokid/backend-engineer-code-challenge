@@ -7,8 +7,8 @@ class Blockchain {
 
     private val blocks = TreeSet(compareBy<Block> { it.blockTime })
 
-    fun getBlocks(): List<Block> {
-        return blocks.toList();
+    fun getBlocks(): Array<Block> {
+        return blocks.toList().toTypedArray();
     }
 
     fun add(block: Block) {
